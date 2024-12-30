@@ -6,13 +6,12 @@
 #          MCAL Source files Based on architecture 
 #-----------------------------------------------
 
-ifeq ($(TARGET_MCU), STM32F429VIT6)
-DRV_SRCS += 
-endif
+DRV_SRCS += \
+./drv_mcu.c \
+./drv_rcc.c \
+./drv_uart.c \
 
-ifeq ($(TARGET_MCU), STM32F401CDU6)
-DRV_SRCS += 
-endif
+
 
 
 #################  END Configurations #############################
