@@ -33,14 +33,25 @@ CC_LINKER_INPUT				:= -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-grou
 CC_ASSEMBLER_FLAGS			:= -x assembler-with-cpp
 
 
-LINKER_SCRIPT 				:= ../MCAL/DEVICES/stm32_f401cdu6_FLASH.ld
-
-BUILD_ARTIFACT_NAME 		:= F4xx_RTOS_BSW_Example
+BUILD_ARTIFACT_NAME 		:= F4xx_Bootloader_Example
 BUILD_ARTIFACT_EXTENSION 	:= elf
 BUILD_ARTIFACT_PREFIX 		:=
 BUILD_ARTIFACT 				:= $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
+
+
+
+
+#-----------------------------------------------
+#  Paths
+#-----------------------------------------------
+DEVICES_SOURCE_LOCATION     := ../devices/
+DRIVER_SOURCE_LOCATION		:= ../drivers/
+PROTOCOL_SOURCE_LOCATION	:= ../protocol/
+
+LINKER_SCRIPT 				:=
 BUILD_LOCATION 				:= ../build_executables/
 OBJECTS_LOCATION			:= ../build_executables/build_objects/
+
 
 
 

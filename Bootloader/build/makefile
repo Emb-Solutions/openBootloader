@@ -1,7 +1,7 @@
 # Copyright (C) 2024 Subhajit Roy
 # This file is part of openAUTOSAR/BSW
 #
-# openAUTOSAR free software: you can redistribute it and/or modify
+# openBootloader free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
@@ -15,10 +15,10 @@
 -include ../makefile.init
 
 -include ./make_config.mk
--include ../MCAL/mcal.mk
--include ../KERNEL/os.mk
--include ../MCAL/startup.mk
-
+-include ../devices/devices.mk
+-include ../devices/devices_asm.mk
+-include ../drivers/drivers.mk
+-include ../protocol/protocol.mk
 
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(strip $(S_DEPS)),)
@@ -67,7 +67,7 @@ main-build: clean_enviornment $(BUILD_ARTIFACT) secondary-outputs
 secondary-outputs: $(SIZE_OUTPUT) $(BUILD_ARTIFACT).list 
 
 
-$(BUILD_ARTIFACT) $(BUILD_ARTIFACT).map: startup_build mcal_build os_build 
+$(BUILD_ARTIFACT) $(BUILD_ARTIFACT).map: devices_asm_build devices_build driver_build protocol_build
 	$(CPP) -o $(BUILD_LOCATION)$(BUILD_ARTIFACT) @"object.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"$(LINKER_SCRIPT)" -Wl,-Map="$(BUILD_LOCATION)$(BUILD_ARTIFACT).map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo '##############################################'
 	@echo ''
@@ -97,6 +97,7 @@ clean_enviornment:
 	@echo > ./object.list
 
 clean:
+	$(RM) $(OBJECTS_LOCATION)*.o
 	$(RM) $(BUILD_LOCATION)$(BUILD_ARTIFACT) object.list $(BUILD_LOCATION)$(BUILD_ARTIFACT).list $(SIZE_OUTPUT) $(BUILD_LOCATION)$(BUILD_ARTIFACT).map
 	@echo '##############################################'
 	@echo ''

@@ -172,9 +172,9 @@ typedef enum
 } IRQn_Type;
 
 
-#include "../../INCLUDE/Std/Std_Types.h"
-#include "../ARCH/ARM/CMSIS/Core/Include/cmsis_gcc.h"
-#include "../ARCH/ARM/CMSIS/Core/Include/core_cm4.h"             /* Cortex-M4 processor and core peripherals */
+#include "../include/Std/Std_Types.h"
+#include "../arch/ARM/CMSIS/Core/Include/cmsis_gcc.h"
+#include "../arch/ARM/CMSIS/Core/Include/core_cm4.h"             /* Cortex-M4 processor and core peripherals */
 
 
 
